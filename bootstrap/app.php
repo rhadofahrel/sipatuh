@@ -17,10 +17,6 @@ return Application::configure(basePath: dirname(__DIR__))
         // ✅ WAJIB: biar Laravel ngerti HTTPS dari Railway proxy
         $middleware->trustProxies(at: '*');
 
-        // ✅ FORCE HTTPS di production
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
-        }
 
         // middleware custom kamu
         $middleware->alias([
