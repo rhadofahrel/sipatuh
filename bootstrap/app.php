@@ -1,4 +1,10 @@
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -8,14 +14,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
-        //  TAMBAHKAN INI
+        // ✅ WAJIB: biar Laravel ngerti HTTPS dari Railway proxy
         $middleware->trustProxies(at: '*');
 
-        // OPTIONAL tapi aman
+        // ✅ FORCE HTTPS di production
         if (env('APP_ENV') === 'production') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+            URL::forceScheme('https');
         }
 
+        // middleware custom kamu
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
         ]);
