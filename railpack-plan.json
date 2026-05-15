@@ -1,10 +1,10 @@
 {
   "$schema": "https://railpack.com/schema.json",
-  "providers": ["php", "node"],
   "steps": {
     "extensions": {
+      "override": true,
       "commands": [
-        "install-php-extensions gd"
+        "install-php-extensions ctype curl dom fileinfo filter hash mbstring openssl pcre pdo session tokenizer xml gd"
       ]
     }
   }
